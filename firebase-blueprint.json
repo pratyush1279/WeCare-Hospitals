@@ -1,0 +1,126 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile stored after registration",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique user ID matching Auth UID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the user"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Primary email address"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Mobile or phone number"
+        },
+        "age": {
+          "type": "number",
+          "description": "Age of the user"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Profile registration timestamp"
+        }
+      },
+      "required": ["id", "name", "email", "createdAt"]
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "An appointment booked at WeCare Hospitals",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique appointment ID"
+        },
+        "patientName": {
+          "type": "string",
+          "description": "Name of the patient"
+        },
+        "patientEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Email of the patient"
+        },
+        "patientPhone": {
+          "type": "string",
+          "description": "Phone number of the patient"
+        },
+        "patientAge": {
+          "type": "number",
+          "description": "Age of the patient"
+        },
+        "departmentId": {
+          "type": "string",
+          "description": "Medical specialty department ID"
+        },
+        "doctorId": {
+          "type": "string",
+          "description": "Specialist physician doctor ID"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of appointment"
+        },
+        "timeSlot": {
+          "type": "string",
+          "description": "Time slot of appointment"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for consultation"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["scheduled", "completed", "cancelled"],
+          "description": "Status of the appointment"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of user who booked the appointment"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": [
+        "id",
+        "patientName",
+        "patientEmail",
+        "patientPhone",
+        "patientAge",
+        "departmentId",
+        "doctorId",
+        "date",
+        "timeSlot",
+        "reason",
+        "status",
+        "userId",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Stores individual user profile and clinical profile fields"
+    },
+    "/appointments/{appointmentId}": {
+      "schema": "Appointment",
+      "description": "Stores clinical consultation schedules linked to user accounts"
+    }
+  }
+}
